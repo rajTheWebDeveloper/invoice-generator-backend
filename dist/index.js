@@ -40,10 +40,11 @@ app.use((error, req, res, next) => {
         message: error.message
     });
 });
+const PORT = process.env.PORT || 2000;
 let start = () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, database_1.default)();
-    app.listen(process.env.PORT, () => {
-        console.log(`Connected to PORT ${process.env.PORT}`);
+    app.listen(2000, () => {
+        console.log(`Connected to PORT ${PORT}`);
     });
 });
 start();

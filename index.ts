@@ -32,14 +32,14 @@ app.use((error:any,req:Request,res:Response,next:NextFunction)=>
         message:error.message
     })
 })
-
+const PORT=process.env.PORT || 2000
 
 let start=async ()=>
 {
     await database()
     app.listen(2000,()=>
     {
-        console.log(`Connected to PORT ${2000}`)
+        console.log(`Connected to PORT ${PORT}`)
     })
 }
 

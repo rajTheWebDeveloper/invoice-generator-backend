@@ -28,7 +28,7 @@ let validateToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             return next("JWT_PASWORD environment variable is not defined");
         }
         token = token.split(' ')[1];
-        let verifiedToken = jsonwebtoken_1.default.verify(token, process.env.JWT_PASSWORD);
+        let verifiedToken = jsonwebtoken_1.default.verify(token, "I_AM_SUPER_SECRET_PASSWORD");
         console.log(verifiedToken);
         if (verifiedToken) {
             next();
