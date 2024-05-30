@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 let accessSchema = new mongoose_1.default.Schema({
     name: {
         type: String,
@@ -30,12 +30,12 @@ let accessSchema = new mongoose_1.default.Schema({
 });
 accessSchema.pre('save', function () {
     return __awaiter(this, void 0, void 0, function* () {
-        this.password = yield bcrypt_1.default.hash(this.password, 10);
+        this.password = yield bcryptjs_1.default.hash(this.password, 10);
     });
 });
 accessSchema.methods.authenticate = function (password) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield bcrypt_1.default.compare(password, this.password);
+        return yield bcryptjs_1.default.compare(password, this.password);
     });
 };
 exports.default = mongoose_1.default.model('Access', accessSchema);
