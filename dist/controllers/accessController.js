@@ -67,12 +67,13 @@ const signIn = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
             });
         }
         if (foundUser) {
-            if (!process.env.JWT_PASSWORD) {
-                throw new Error("JWT_PASSWORD environment variable is not defined");
-            }
+            // if (!process.env.JWT_PASSWORD) {
+            //     throw new Error("JWT_PASSWORD environment variable is not defined");
+            // }
+            console.log("Change Made");
             if (yield foundUser.authenticate(password)) {
                 let { _id } = foundUser;
-                let token = jsonwebtoken_1.default.sign({ _id }, process.env.JWT_PASSWORD, { expiresIn: '8h' });
+                let token = jsonwebtoken_1.default.sign({ _id }, "I_AM_SUPER_SECRET_PASSWORD", { expiresIn: '8h' });
                 foundUser = JSON.parse(JSON.stringify(foundUser));
                 let withToken = Object.assign({ token: token }, foundUser);
                 return res.status(200).json({
