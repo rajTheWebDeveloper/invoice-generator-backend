@@ -17,7 +17,6 @@
     "@types/jsonwebtoken": "^9.0.6",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -32,5 +31,8 @@
     "mkdirp": "^3.0.1",
     "nodemon": "^3.1.1",
     "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
