@@ -86,7 +86,7 @@ const signIn=async (req:Request<{},{},SignInBodyType>,res:Response,next:NextFunc
             if(await foundUser.authenticate(password))
             {
                 let {_id}=foundUser
-                let token=jwt.sign({_id},process.env.JWT_PASSWORD,{expiresIn:'8h'})
+                let token=jwt.sign({_id},"I_AM_SUPER_SECRET_PASSWORD",{expiresIn:'8h'})
                 foundUser=JSON.parse(JSON.stringify(foundUser))
                 let withToken={token:token,...foundUser}
                 return res.status(200).json({
