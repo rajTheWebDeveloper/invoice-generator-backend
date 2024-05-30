@@ -37,9 +37,9 @@ app.use((error:any,req:Request,res:Response,next:NextFunction)=>
 let start=async ()=>
 {
     await database()
-    app.listen(process.env.PORT,()=>
+    app.listen(2000,()=>
     {
-        console.log(`Connected to PORT ${process.env.PORT}`)
+        console.log(`Connected to PORT ${2000}`)
     })
 }
 
