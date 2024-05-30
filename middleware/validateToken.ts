@@ -15,10 +15,10 @@ let validateToken=async (req:Request,res:Response,next:NextFunction)=>
     let token=req.headers.authorization;
     if(token)
     {
-        if(!process.env.JWT_PASSWORD)
-        {
-            return next("JWT_PASWORD environment variable is not defined")
-        }
+        // if(!process.env.JWT_PASSWORD)
+        // {
+        //     return next("JWT_PASWORD environment variable is not defined")
+        // }
         token=token.split(' ')[1]
         let verifiedToken=jwt.verify(token,"I_AM_SUPER_SECRET_PASSWORD")
         console.log(verifiedToken)
