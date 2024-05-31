@@ -4,15 +4,12 @@ import path from 'path'
 import cors from 'cors'
 import database from './database/database'
 import AccessRoutes from './routes/accessRoutes'
+import ProductRoutes from './routes/productRoutes'
 import PdfRoutes from './routes/pdfRoutes'
 const __basePath=path.dirname(__filename)
 const __configPath=__basePath+path.sep+'config'+path.sep+'.env'
 const app=express()
 
-
-console.log(__basePath)
-console.log(__configPath)
-console.log("Raj KING")
 
 app.use(cors())
 dotenv.config({
@@ -21,6 +18,7 @@ dotenv.config({
 
 app.use(express.json())
 app.use('/api',AccessRoutes)
+app.use('/api',ProductRoutes)
 app.use('/api',PdfRoutes)
 
 app.use((error:any,req:Request,res:Response,next:NextFunction)=>
@@ -32,7 +30,9 @@ app.use((error:any,req:Request,res:Response,next:NextFunction)=>
         message:error.message
     })
 })
+
 const PORT=process.env.PORT || 2000
+
 
 let start=async ()=>
 {

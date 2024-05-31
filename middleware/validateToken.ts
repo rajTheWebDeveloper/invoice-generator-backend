@@ -13,27 +13,41 @@ env.config({
 let validateToken=async (req:Request,res:Response,next:NextFunction)=>
 {
     let token=req.headers.authorization;
-    if(token)
+    console.log(token)
+    if(token && token.length>10)
     {
         // if(!process.env.JWT_PASSWORD)
         // {
         //     return next("JWT_PASWORD environment variable is not defined")
         // }
-        token=token.split(' ')[1]
-        let verifiedToken=jwt.verify(token,"I_AM_SUPER_SECRET_PASSWORD")
-        console.log(verifiedToken)
-        if(verifiedToken)
+        try 
         {
-            next()
+            token=token.split(' ')[1]
+            console.log(token)
+            let verifiedToken=jwt.verify(token,"I_AM_SUPER_SECRET_PASSWORD")
+            if(verifiedToken)
+            {
+                next()
+            }
+            else 
+            {
+                return next("JWT_PASWORD environment variable is not defined")
+            }
         }
-        else 
+        catch(error)
         {
-           return next("JWT_PASWORD environment variable is not defined")
+            return res.status(401).json({
+                success:false,
+                message:"Invalid JWT Token"
+            })
         }
     }
     else 
     {
-       return next("Invalid Token")
+       return res.status(401).json({
+         success:false,
+         message:"Unauthorized. Please login to add product"
+       })
     }
 }
 

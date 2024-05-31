@@ -23,23 +23,35 @@ dotenv_1.default.config({
 });
 let validateToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let token = req.headers.authorization;
-    if (token) {
+    console.log(token);
+    if (token && token.length > 10) {
         // if(!process.env.JWT_PASSWORD)
         // {
         //     return next("JWT_PASWORD environment variable is not defined")
         // }
-        token = token.split(' ')[1];
-        let verifiedToken = jsonwebtoken_1.default.verify(token, "I_AM_SUPER_SECRET_PASSWORD");
-        console.log(verifiedToken);
-        if (verifiedToken) {
-            next();
+        try {
+            token = token.split(' ')[1];
+            console.log(token);
+            let verifiedToken = jsonwebtoken_1.default.verify(token, "I_AM_SUPER_SECRET_PASSWORD");
+            if (verifiedToken) {
+                next();
+            }
+            else {
+                return next("JWT_PASWORD environment variable is not defined");
+            }
         }
-        else {
-            return next("JWT_PASWORD environment variable is not defined");
+        catch (error) {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid JWT Token"
+            });
         }
     }
     else {
-        return next("Invalid Token");
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized. Please login to add product"
+        });
     }
 });
 exports.default = validateToken;

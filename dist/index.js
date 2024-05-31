@@ -18,19 +18,18 @@ const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const database_1 = __importDefault(require("./database/database"));
 const accessRoutes_1 = __importDefault(require("./routes/accessRoutes"));
+const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
 const pdfRoutes_1 = __importDefault(require("./routes/pdfRoutes"));
 const __basePath = path_1.default.dirname(__filename);
 const __configPath = __basePath + path_1.default.sep + 'config' + path_1.default.sep + '.env';
 const app = (0, express_1.default)();
-console.log(__basePath);
-console.log(__configPath);
-console.log("Raj KING");
 app.use((0, cors_1.default)());
 dotenv_1.default.config({
     path: __configPath
 });
 app.use(express_1.default.json());
 app.use('/api', accessRoutes_1.default);
+app.use('/api', productRoutes_1.default);
 app.use('/api', pdfRoutes_1.default);
 app.use((error, req, res, next) => {
     error.statusCode = error.statusCode || 500;

@@ -34,7 +34,7 @@ const signUp=async (req:Request<{},{},SignUpBodyType>,res:Response,next:NextFunc
         let foundUser=await Access.findOne({
             email:email
         })
-
+        
         if(!foundUser)
         {
             let createdUser=await Access.create({
@@ -83,7 +83,6 @@ const signIn=async (req:Request<{},{},SignInBodyType>,res:Response,next:NextFunc
             // if (!process.env.JWT_PASSWORD) {
             //     throw new Error("JWT_PASSWORD environment variable is not defined");
             // }
-            console.log("Change Made")
             if(await foundUser.authenticate(password))
             {
                 let {_id}=foundUser

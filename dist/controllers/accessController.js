@@ -70,7 +70,6 @@ const signIn = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
             // if (!process.env.JWT_PASSWORD) {
             //     throw new Error("JWT_PASSWORD environment variable is not defined");
             // }
-            console.log("Change Made");
             if (yield foundUser.authenticate(password)) {
                 let { _id } = foundUser;
                 let token = jsonwebtoken_1.default.sign({ _id }, "I_AM_SUPER_SECRET_PASSWORD", { expiresIn: '8h' });
